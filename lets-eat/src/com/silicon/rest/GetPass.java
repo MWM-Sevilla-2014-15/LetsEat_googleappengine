@@ -1,6 +1,11 @@
 package com.silicon.rest;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,22 +13,20 @@ import org.json.JSONStringer;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
-import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import com.silicom.utils.PropUtil;
-import com.silicon.dao.UserDao;
 import com.silicon.entities.User;
-
+import com.silicon.dao.UserDao;
 /**
  * Resource which has only one representation.
  *
  */
-public class SingIn extends ServerResource {
+public class GetPass extends ServerResource {
 
-PropUtil prop = new PropUtil();
+	PropUtil prop = new PropUtil();
 	
 	@SuppressWarnings("finally")
 	@Post("json:json")
@@ -38,9 +41,8 @@ PropUtil prop = new PropUtil();
 			JSONObject jsonobject = represent.getJsonObject();
 			String requestString = jsonobject.getString("request");
 			JSONObject json = new JSONObject(requestString);
-			User user = new User 		(json.getString("name"),
-										json.getString("pass"));
-			result = UserDao.authenticateUser(user);
+			User user = new User 		(json.getString("email"));
+			result = UserDao.createUser(user);
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);

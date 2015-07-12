@@ -1,5 +1,12 @@
 package com.silicon.rest;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -10,12 +17,17 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import com.silicom.utils.PropUtil;
+import com.silicon.entities.User;
+import com.silicon.dao.UserDao;
 /**
  * Resource which has only one representation.
  *
  */
 public class SingUp extends ServerResource {
 
+	PropUtil prop = new PropUtil();
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -23,59 +35,38 @@ public class SingUp extends ServerResource {
 
 		Representation rep = null;
 		JSONStringer jsReply = null;
+		String result;
 		
 		try {
-			/*
-			 * Representation entity = getRequestEntity(); JsonRepresentation
-			 * represent = new JsonRepresentation(entity);
-			 */
-
 			JSONObject jsonobject = represent.getJsonObject();
 			String requestString = jsonobject.getString("request");
 			JSONObject json = new JSONObject(requestString);
-			String user = json.getString("user_email");
-			String login = json.getString("login");
-			// double score = json.getDouble(“score”);
-
-			getResponse().setStatus(Status.SUCCESS_ACCEPTED);
+			User user = new User 		(json.getString("email"),
+										json.getString("name"),
+										json.getString("pass"));
+			result = UserDao.createUser(user);
 			jsReply = new JSONStringer();
 			jsReply.object();
-
-			jsReply.key("code").value("SUCCESS");
-			jsReply.key("desc").value("Process Sucessfully");
-
+			jsReply.key("code").value(result);
+			jsReply.key("desc").value(prop.getPropierties().get(result));
 			jsReply.endObject();
-
 			getResponse().setStatus(Status.SUCCESS_OK);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 			jsReply = new JSONStringer();
-
 			try {
-
 				jsReply.object();
-
-				jsReply.key("CODE").value("Error");
-
-				jsReply.key("DESC").value(e.getMessage());
-
+				jsReply.key("code").value("ERROR");
+				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
-
 			} catch (JSONException e1) {
-
 				e1.printStackTrace();
-
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
-
 		} finally {
 			rep = new JsonRepresentation(jsReply);
 			return rep;
 		}
-
 	}
 
 }
