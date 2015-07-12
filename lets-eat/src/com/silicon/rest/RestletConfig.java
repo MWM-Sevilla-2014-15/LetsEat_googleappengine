@@ -3,6 +3,7 @@ package com.silicon.rest;
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
+import com.silicom.utils.PropUtil;
 
 public class RestletConfig extends Application{
 	/**
@@ -12,10 +13,11 @@ public class RestletConfig extends Application{
     public Restlet createInboundRoot() {
         // Create a router Restlet 
         Router router = new Router(getContext());
+        PropUtil.init();
         // Services
         router.attach("/singup", SingUp.class);
         router.attach("/singin", SingIn.class); 
-        router.attach("/getpass", SingIn.class); 
+        router.attach("/getpass", GetPass.class); 
         return router;
     }
 }

@@ -22,8 +22,6 @@ import com.silicon.entities.User;
  *
  */
 public class SingIn extends ServerResource {
-
-PropUtil prop = new PropUtil();
 	
 	@SuppressWarnings("finally")
 	@Post("json:json")
@@ -44,7 +42,7 @@ PropUtil prop = new PropUtil();
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);
-			jsReply.key("desc").value(prop.getPropierties().get(result));
+			jsReply.key("desc").value(PropUtil.getPropierties().get(result));
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {

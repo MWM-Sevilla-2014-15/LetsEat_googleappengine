@@ -1,12 +1,5 @@
 package com.silicon.rest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -20,14 +13,13 @@ import org.restlet.resource.ServerResource;
 import com.silicom.utils.PropUtil;
 import com.silicon.entities.User;
 import com.silicon.dao.UserDao;
+
 /**
  * Resource which has only one representation.
  *
  */
 public class SingUp extends ServerResource {
 
-	PropUtil prop = new PropUtil();
-	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -48,7 +40,7 @@ public class SingUp extends ServerResource {
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);
-			jsReply.key("desc").value(prop.getPropierties().get(result));
+			jsReply.key("desc").value(PropUtil.getPropierties().get(result));
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {

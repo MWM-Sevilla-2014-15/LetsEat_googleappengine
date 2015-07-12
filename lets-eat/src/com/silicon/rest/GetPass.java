@@ -26,8 +26,6 @@ import com.silicon.dao.UserDao;
  */
 public class GetPass extends ServerResource {
 
-	PropUtil prop = new PropUtil();
-	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -42,11 +40,11 @@ public class GetPass extends ServerResource {
 			String requestString = jsonobject.getString("request");
 			JSONObject json = new JSONObject(requestString);
 			User user = new User 		(json.getString("email"));
-			result = UserDao.createUser(user);
+			result = UserDao.existEmail(user);
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);
-			jsReply.key("desc").value(prop.getPropierties().get(result));
+			jsReply.key("desc").value(PropUtil.getPropierties().get(result));
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
