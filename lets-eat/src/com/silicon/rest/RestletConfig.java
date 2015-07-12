@@ -11,9 +11,10 @@ public class RestletConfig extends Application{
      */
     @Override
     public Restlet createInboundRoot() {
-        // Create a router Restlet 
+    	//Load System Properties
+    	PropUtil.init();
+    	// Create a router Restlet
         Router router = new Router(getContext());
-        PropUtil.init();
         // Services
         router.attach("/singup", SingUp.class);
         router.attach("/singin", SingIn.class); 
