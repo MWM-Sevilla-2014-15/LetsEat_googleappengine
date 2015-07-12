@@ -1,9 +1,7 @@
 package com.silicom.utils;
 
-import	java.io.IOException;	
 import java.io.UnsupportedEncodingException;
 import	java.util.Properties;	
-
 import	javax.mail.Message;	
 import	javax.mail.MessagingException;	
 import	javax.mail.Session;	
@@ -22,10 +20,10 @@ public class EmailSender {
 		Session	session	= Session.getDefaultInstance(props,	null);	
 		try	{	
 			Message	email	= new MimeMessage(session);	
-			email.setFrom(new	InternetAddress("thisisgod@com-silicon-letseat.appspotmail.com",	"Let's Eat Servicio de Recuperacion de Claves"));	
+			email.setFrom(new	InternetAddress("notreply@com-silicon-letseat.appspotmail.com",	"Let's Eat Servicios"));	
 			email.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail(), user.getName()));	
 			email.setSubject("Recuperacion de su Clave Let's Eat");	
-			email.setText("Estimado "+ user.getName() +", tal y como nos ha solcitado adjunto su clave de acceso :" +user.getPass());	
+			email.setText("Su usuario: "+ user.getName() +", tiene asociada la clave de acceso: " +user.getPass());	
 			Transport.send(email);
 		} catch	(AddressException e) {	
 			msg = PropUtil.GP_E_IE;		
