@@ -13,8 +13,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 
 
 public class RestaurantDao {
-	//Restaurante Entity
-	private final static String REST_KEY ="Restaurante";
+	//Restaurant Entity
+	private final static String REST_KEY ="Restaurant";
 	//Auditing
 	private final static String REST_FIELD_DATE ="signUpDate";
 	//Description
@@ -25,7 +25,9 @@ public class RestaurantDao {
 	private final static String REST_FIELD_CLOSEAT ="close_at";
 	private final static String REST_FIELD_AVGPRICE ="avg_price";
 	private final static String REST_FIELD_SCORE ="score";
-	private final static String REST_FIELD_TABLE ="table";
+	private final static String REST_FIELD_TOTALTABLES ="totalTables";
+	//State
+	private final static String REST_FIELD_BOOKTABLES ="bookTables";
 	//Contact and Location
 	private final static String REST_FIELD_LAT ="lat";
 	private final static String REST_FIELD_LONG ="lon";
