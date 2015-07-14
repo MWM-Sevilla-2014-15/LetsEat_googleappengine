@@ -1,0 +1,21 @@
+/*Personal Style */
+#map-canvas {
+	height: 500px;
+	position: relative;
+}
+
+#mapContainer {
+	background-color: #eee;
+	border-radius: 6px;
+	color: inherit;
+	padding: 30px;
+}
+.right{
+	float:right;
+}
+.left{
+	float:left;
+}
+.padded{
+	padding: 2%;
+}

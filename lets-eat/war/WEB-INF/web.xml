@@ -4,6 +4,23 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	<welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+	<!-- ADMIN WEB -->
+	<context-param>
+    	<param-name>AdministratorEmail</param-name>
+    	<param-value>admin@admin</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>AdminLogin</servlet-name>
+		<servlet-class>com.silicom.servlets.AdminLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminLogin</servlet-name>
+		<url-pattern>/adminLogin</url-pattern>
+	</servlet-mapping>
+	<!-- REST API -->
 	<servlet>
 		<servlet-name>RestletServlet</servlet-name>
 		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
@@ -12,7 +29,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 			<param-value>com.silicon.rest.RestletConfig</param-value>
 		</init-param>
 	</servlet>
-	<!-- Catch all requests -->
 	<servlet-mapping>
 		<servlet-name>RestletServlet</servlet-name>
 		<url-pattern>/*</url-pattern>

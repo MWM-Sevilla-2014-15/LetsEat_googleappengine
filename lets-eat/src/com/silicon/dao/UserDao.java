@@ -31,7 +31,7 @@ public class UserDao {
 	private final static String USER_FIELD_EMAIL ="email";
 	private final static String USER_FIELD_NAME ="name";
 	private final static String USER_FIELD_PASS ="pass";
-
+	
 
 	public static String createUser(User user){	
 		String msg=PropUtil.SU_OK;
@@ -100,6 +100,26 @@ public class UserDao {
 			}
 		}
 		return msg;
+	}
+	
+	public static String isAdmin(User user, String emailAdmin){	
+		String msg =PropUtil.IA_OK;
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();	
+		Key	userKey	= KeyFactory.createKey(USER_KEY, user.getName());	
+		try	{
+			Entity entryEntity = datastore.get(userKey);	
+			if (!entryEntity.getProperty(USER_FIELD_PASS).toString().equals(user.getPass())){
+				msg=PropUtil.IA_E;
+			}else{
+				
+				if (!entryEntity.getProperty(USER_FIELD_EMAIL).toString().equals(emailAdmin)){
+					msg=PropUtil.IA_E;
+				}
+			}
+		} catch	(EntityNotFoundException e)	{	
+			msg =PropUtil.IA_E;
+		}
+		return msg;	
 	}
 	
 }
