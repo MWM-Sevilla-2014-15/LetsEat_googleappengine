@@ -38,7 +38,7 @@ public class SingIn extends ServerResource {
 			JSONObject json = new JSONObject(requestString);
 			User user = new User 		(json.getString("name"),
 										json.getString("pass"));
-			result = UserDao.authenticateUser(user);
+			result = UserDao.authenticate(user);
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);

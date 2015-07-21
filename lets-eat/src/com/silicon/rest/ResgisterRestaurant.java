@@ -1,12 +1,5 @@
 package com.silicon.rest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -18,13 +11,10 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import com.silicom.utils.PropUtil;
-import com.silicon.entities.User;
-import com.silicon.dao.UserDao;
-/**
- * Resource which has only one representation.
- *
- */
-public class GetPass extends ServerResource {
+import com.silicon.entities.Restaurant;
+import com.silicon.dao.RestaurantDao;;
+
+public class ResgisterRestaurant extends ServerResource {
 
 	@SuppressWarnings("finally")
 	@Post("json:json")
@@ -34,13 +24,24 @@ public class GetPass extends ServerResource {
 		Representation rep = null;
 		JSONStringer jsReply = null;
 		String result;
-		
 		try {
 			JSONObject jsonobject = represent.getJsonObject();
 			String requestString = jsonobject.getString("request");
 			JSONObject json = new JSONObject(requestString);
-			User user = new User 		(json.getString("email"));
-			result = UserDao.isEmailDuplicated(user);
+			Restaurant restaurant = new Restaurant 	(json.getString("name"),
+													json.getString("type"),
+												json.getString("desc"),
+												json.getString("telf"),
+												json.getString("m_t_open"),
+												json.getString("m_t_close"),
+												json.getString("t_t_open"),
+												json.getString("t_t_close"),
+												json.getInt("avg_price"),
+												(float)json.getDouble("score"),
+												json.getInt("totalTables"),
+												(float)json.getDouble("lat"),
+												(float)json.getDouble("lon"));
+			result = RestaurantDao.create(restaurant);
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);
@@ -64,5 +65,4 @@ public class GetPass extends ServerResource {
 			return rep;
 		}
 	}
-
 }

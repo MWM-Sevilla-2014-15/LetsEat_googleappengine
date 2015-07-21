@@ -36,7 +36,7 @@ public class SingUp extends ServerResource {
 			User user = new User 		(json.getString("email"),
 										json.getString("name"),
 										json.getString("pass"));
-			result = UserDao.createUser(user);
+			result = UserDao.create(user);
 			jsReply = new JSONStringer();
 			jsReply.object();
 			jsReply.key("code").value(result);

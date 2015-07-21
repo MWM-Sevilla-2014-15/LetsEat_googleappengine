@@ -1,11 +1,7 @@
 package com.silicon.rest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,14 +13,15 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.gson.Gson;
 import com.silicom.utils.PropUtil;
+import com.silicon.entities.Restaurant;
 import com.silicon.entities.User;
+import com.silicon.dao.RestaurantDao;
 import com.silicon.dao.UserDao;
-/**
- * Resource which has only one representation.
- *
- */
-public class GetPass extends ServerResource {
+
+public class GetRestaurants extends ServerResource {
 
 	@SuppressWarnings("finally")
 	@Post("json:json")
@@ -34,23 +31,24 @@ public class GetPass extends ServerResource {
 		Representation rep = null;
 		JSONStringer jsReply = null;
 		String result;
-		
+		String jsonRestaurantList = null;
 		try {
-			JSONObject jsonobject = represent.getJsonObject();
-			String requestString = jsonobject.getString("request");
-			JSONObject json = new JSONObject(requestString);
-			User user = new User 		(json.getString("email"));
-			result = UserDao.isEmailDuplicated(user);
-			jsReply = new JSONStringer();
-			jsReply.object();
-			jsReply.key("code").value(result);
-			jsReply.key("desc").value(PropUtil.getPropierties().get(result));
-			jsReply.endObject();
+			ArrayList <Restaurant> restauranteList = RestaurantDao.fetch();
+			if (!(restauranteList.size()>0)){
+				jsReply = new JSONStringer();
+				jsReply.object();
+				jsReply.key("code").value(PropUtil.GR_I_EMP);
+				jsReply.key("desc").value(PropUtil.getPropierties().get(PropUtil.GR_I_EMP));
+				jsReply.endObject();
+			}else {
+				Gson gson = new Gson(); 
+				jsonRestaurantList = gson.toJson(restauranteList);
+			}
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			jsReply = new JSONStringer();
 			try {
+				jsReply = new JSONStringer();
 				jsReply.object();
 				jsReply.key("code").value("ERROR");
 				jsReply.key("desc").value(e.getMessage());
@@ -60,9 +58,12 @@ public class GetPass extends ServerResource {
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {
-			rep = new JsonRepresentation(jsReply);
+			if (jsReply!=null){
+				rep = new JsonRepresentation(jsReply);
+			} else {
+				rep = new JsonRepresentation(jsonRestaurantList);
+			}
 			return rep;
 		}
 	}
-
 }

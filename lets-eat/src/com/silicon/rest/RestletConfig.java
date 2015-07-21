@@ -18,7 +18,9 @@ public class RestletConfig extends Application{
         // Services
         router.attach("/singup", SingUp.class);
         router.attach("/singin", SingIn.class); 
-        router.attach("/getpass", GetPass.class); 
+        router.attach("/getpass", GetPass.class);
+        router.attach("/getrestaurants", GetRestaurants.class);
+        router.attach("/bookrestaurant", BookRestaurant.class);
         return router;
     }
 }

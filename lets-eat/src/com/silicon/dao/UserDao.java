@@ -24,16 +24,14 @@ import com.silicom.utils.EmailSender;
 import com.silicom.utils.PropUtil;
 import com.silicon.entities.User;
 
-public class UserDao {
+public class UserDao implements InterfDao {
 	//User Entity
 	private final static String USER_KEY ="User";
-	private final static String USER_FIELD_DATE ="signUpDate";	
 	private final static String USER_FIELD_EMAIL ="email";
 	private final static String USER_FIELD_NAME ="name";
 	private final static String USER_FIELD_PASS ="pass";
 	
-
-	public static String createUser(User user){	
+	public static String create(User user){	
 		String msg=PropUtil.SU_OK;
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();	
 		Key	userKey	= KeyFactory.createKey(USER_KEY, user.getName());	
@@ -42,11 +40,12 @@ public class UserDao {
 			datastore.get(userKey);
 			msg=PropUtil.SU_E_UD;
 		} catch	(EntityNotFoundException e)	{
-			if (existEmail(user).equals(PropUtil.GP_E_ENE)){
+			if (isEmailDuplicated(user).equals(PropUtil.GP_E_ENE)){
 				Transaction txn = datastore.beginTransaction();
 				try {
 					Entity entryEntity =	new	Entity(USER_KEY, user.getName());
-					entryEntity.setProperty(USER_FIELD_DATE, user.getSignupDate());
+					entryEntity.setProperty(FIELD_DATE, user.getCreateDate());
+					entryEntity.setProperty(FIELD_ACTIVE, user.getIsActived());
 					entryEntity.setProperty(USER_FIELD_EMAIL, user.getEmail());
 					entryEntity.setProperty(USER_FIELD_NAME, user.getName());
 					entryEntity.setProperty(USER_FIELD_PASS, user.getPass());
@@ -64,7 +63,7 @@ public class UserDao {
 		return msg;	
 	}
 	
-	public static String authenticateUser(User user){	
+	public static String authenticate(User user){	
 		String msg =PropUtil.SI_OK;
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();	
 		Key	userKey	= KeyFactory.createKey(USER_KEY, user.getName());	
@@ -80,7 +79,7 @@ public class UserDao {
 		return msg;	
 	}
 	
-	public static String existEmail(User user){
+	public static String isEmailDuplicated(User user){
 		String msg =PropUtil.GP_E_ENE;
 		DatastoreService datastore	= DatastoreServiceFactory.getDatastoreService();
 		Filter propertyFilter = new FilterPredicate(USER_FIELD_EMAIL, 
@@ -111,7 +110,6 @@ public class UserDao {
 			if (!entryEntity.getProperty(USER_FIELD_PASS).toString().equals(user.getPass())){
 				msg=PropUtil.IA_E;
 			}else{
-				
 				if (!entryEntity.getProperty(USER_FIELD_EMAIL).toString().equals(emailAdmin)){
 					msg=PropUtil.IA_E;
 				}

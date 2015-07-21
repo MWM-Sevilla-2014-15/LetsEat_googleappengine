@@ -5,12 +5,30 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
+	<!--  
+	<error-page>
+		<exception-type>java.lang.ArithmeticException</exception-type>
+		<location>/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+	-->
 	<!-- ADMIN WEB -->
 	<context-param>
-    	<param-name>AdministratorEmail</param-name>
-    	<param-value>admin@admin</param-value>
+		<param-name>AdministratorEmail</param-name>
+		<param-value>admin@admin</param-value>
 	</context-param>
 	<servlet>
 		<servlet-name>AdminLogin</servlet-name>
@@ -19,6 +37,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>AdminLogin</servlet-name>
 		<url-pattern>/adminLogin</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateRestaurant</servlet-name>
+		<servlet-class>com.silicom.servlets.CreateRestaurant</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateRestaurant</servlet-name>
+		<url-pattern>/createrestaurant</url-pattern>
 	</servlet-mapping>
 	<!-- REST API -->
 	<servlet>
@@ -31,6 +57,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RestletServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 </web-app>

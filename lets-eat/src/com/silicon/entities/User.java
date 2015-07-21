@@ -3,13 +3,15 @@ package com.silicon.entities;
 import java.util.Date;
 
 public class User {
-	private Date signupDate;
+	private Date createDate;
+	private int isActived;
 	private String email;
 	private String name;
 	private String pass;
 	
 	public User (String email, String name, String pass) {
-		this.signupDate = new Date();
+		this.createDate = new Date();
+		this.isActived = 1;
 		this.email = email;
 		this.name = name;
 		this.pass = pass;
@@ -22,10 +24,6 @@ public class User {
 	
 	public User (String email) {
 		this.email = email;
-	}
-
-	public Date getSignupDate() {
-		return signupDate;
 	}
 
 	public String getEmail() {
@@ -50,6 +48,22 @@ public class User {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public int getIsActived() {
+		return isActived;
+	}
+
+	public void setIsActived(int isActived) {
+		this.isActived = isActived;
 	}
 	
 }

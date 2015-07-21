@@ -20,8 +20,15 @@ public class PropUtil {
 	public final static String GP_E_IE = "GP_E_IE";
 	public final static String RR_OK = "RR_OK";
 	public final static String RR_E_RD = "RR_E_RD";
+	public final static String RR_E_U = "RR_E_U";
 	public final static String IA_OK = "IA_OK";
 	public final static String IA_E = "IA_E";
+	public final static String GR_I_EMP = "GR_I_EMP";
+	public final static String BR_OK = "BR_OK";
+	public final static String BR_E_RNF =  "BR_E_RNF";
+	public final static String BR_E_U = "BR_E_U";
+	public final static String BR_E_RF = "BR_E_RF";
+
 	//URL redrirect
 	public final static String RESTAURANT_REGIST_URL = "/resgis_resta.jsp";
 	public final static String ADMIN_URL = "/index.jsp";
@@ -48,10 +55,19 @@ public class PropUtil {
 		propierties.put(GP_E_ENE,"Error en Proceso de Recuperacion de Password. Lo sentimos pero esa dirección de email no se encuentra registrada en nuestro sistema.");
 		propierties.put(GP_E_IE,"Error en Proceso de Recuperacion de Password. Email introducido para el envio no es válido");
 		//isAdmin
-		propierties.put(SI_OK,"Admin Autenticado Correctamente.");
-		propierties.put(SI_E_UNR,"Admin NO Autenticado");
+		propierties.put(IA_OK,"Admin Autenticado Correctamente.");
+		propierties.put(IA_E,"Admin NO Autenticado");
 		//restaurantRegister
 		propierties.put(RR_OK,"Restaurante Registrado Correctamente");
 		propierties.put(RR_E_RD,"Error en Proceso de Registro de Restaurante. El nombre del restaurante introducido ya se encuentra registrado en la Base de Datos.");
+		propierties.put(RR_E_U,"Error en Proceso de Registro de Restaurante. Error Desconocido");
+		//get restaurantes
+		propierties.put(GR_I_EMP,"Lista de Restaurantes vacía");
+		//restaurantBooking
+		propierties.put(BR_OK,"Restaurante Reservado Correctamente");
+		propierties.put(BR_E_RNF,"Error en Proceso de Reserva de Restaurante. En el sistema no existe ningun restaurante con el id introducido");
+		propierties.put(BR_E_U,"Error en Proceso de Reserva de Restaurante. Error Desconocido");
+		propierties.put(BR_E_RF,"Error en Proceso de Reserva de Restaurante. No hay el número de mesas introducidas libres para el restaurante seleccionado");
+		
 	}
 }

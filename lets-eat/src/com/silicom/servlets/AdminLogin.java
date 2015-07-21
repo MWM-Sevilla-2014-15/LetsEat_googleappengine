@@ -32,4 +32,8 @@ public class AdminLogin extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		doPost(req,resp);
+	}
 }
