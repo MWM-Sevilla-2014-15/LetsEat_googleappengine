@@ -6,7 +6,8 @@ public class Restaurant {
 	// Audit
 	private long id;
 	private Date createDate;
-	private int isActived;
+	private Date modifDate;
+	private Integer isActived;
 	// Description
 	private String name;
 	private String type;
@@ -17,6 +18,7 @@ public class Restaurant {
 	private String t_t_open;
 	private String t_t_close;
 	private int avg_price;
+	private int discount;
 	private float score;
 	private int totalTables;
 	// State
@@ -38,6 +40,7 @@ public class Restaurant {
 	 * @param t_t_open
 	 * @param t_t_close
 	 * @param avg_price
+	 * @param discount
 	 * @param score
 	 * @param totalTables
 	 * @param lat
@@ -45,8 +48,10 @@ public class Restaurant {
 	 */
 	public Restaurant(String name, String type, String desc, String telf, String m_t_open,
 			String m_t_close, String t_t_open, String t_t_close, 
-			int avg_price,float score,int totalTables,float lat,float lon) {
-		this.createDate = new Date();
+			int avg_price, int discount, float score,int totalTables,float lat,float lon) {
+		Date dateRegister = new Date();
+		this.createDate = dateRegister;
+		this.modifDate = dateRegister;
 		this.isActived = 1;
 		this.name = name;
 		this.type = type;
@@ -57,8 +62,9 @@ public class Restaurant {
 		this.m_t_close = m_t_close;
 		this.t_t_open = t_t_open;
 		this.t_t_close = t_t_close;
-		this.setAvg_price(avg_price);
-		this.setScore(score);
+		this.avg_price=avg_price;
+		this.discount= discount;
+		this.score=score;
 		this.totalTables=totalTables;
 		this.bookTables = 0;
 		this.prov = "";
@@ -85,27 +91,28 @@ public class Restaurant {
 	 */
 	public Restaurant(long id, String name, String type, String desc, String telf, String m_t_open,
 			String m_t_close, String t_t_open, String t_t_close, 
-			int avg_price, float score,int totalTables,int bookTables,float lat,float lon) {
+			int avg_price, int discount, float score,int totalTables,int bookTables,float lat,float lon) {
 		this.id = id;
+		this.isActived=null; //to avoid include it in the JSON response
 		this.name = name;
 		this.type = type;
-		this.url = "";
 		this.desc = desc;
 		this.telf = telf;
 		this.m_t_open = m_t_open;
 		this.m_t_close = m_t_close;
 		this.t_t_open = t_t_open;
 		this.t_t_close = t_t_close;
-		this.setAvg_price(avg_price);
-		this.setScore(score);
-		this.totalTables=totalTables;
+		this.avg_price=avg_price;
+		this.discount= discount;
+		this.score=score;
+		this.totalTables = totalTables;
 		this.bookTables = bookTables;
-		this.prov = "";
 		this.lat=lat;
 		this.lon=lon;
 	}
 
 	public Restaurant(long id, int bookTables) {
+		this.modifDate = new Date();
 		this.id = id;
 		this.bookTables = bookTables;
 	}
@@ -265,6 +272,18 @@ public class Restaurant {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+	public Date getModifDate() {
+		return modifDate;
+	}
+	public void setModifDate(Date modifDate) {
+		this.modifDate = modifDate;
 	}
 	
 }

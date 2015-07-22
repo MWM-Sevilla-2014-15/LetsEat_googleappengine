@@ -2,6 +2,7 @@ package com.silicon.rest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,10 @@ import com.silicon.dao.RestaurantDao;
 import com.silicon.dao.UserDao;
 
 public class GetRestaurants extends ServerResource {
-
+	
+	private static final Logger _logger = Logger
+			.getLogger(GetRestaurants.class.getName());
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -46,7 +50,7 @@ public class GetRestaurants extends ServerResource {
 			}
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			try {
 				jsReply = new JSONStringer();
 				jsReply.object();
@@ -54,7 +58,7 @@ public class GetRestaurants extends ServerResource {
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

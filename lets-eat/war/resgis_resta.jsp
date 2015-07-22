@@ -33,13 +33,15 @@
 	</section>
 	<section>
 		<div class="container">
+			<div class="row"></div>
+			<div class="row"></div>
 			<div class="row">
 				<div class="col-md-7">
 					<h3>
 						<span class="badge">1</span> Georreferenciaci&oacute;n
 					</h3>
 				</div>
-				<div class="col-md-5 padded">
+				<div class="col-md-5 padded well">
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-default"
@@ -74,8 +76,12 @@
 						<div class="form-group col-md-6">
 							<label for="name">Nombre:</label> <input type="text"
 								class="form-control" id="name" name="name" required>
-							<label for="desc">Telf:</label> <input type="text"
+							<label for="desc">Telf:</label>
+							<div class="input-group">
+									<span class="input-group-addon"> <i
+										class="fa fa-phone fa-fw"></i></span> <input type="text"
 								class="form-control" id="telf" name="telf" required>
+							</div>
 						</div>
 						<div>
 							<div class="form-group col-md-3">
@@ -121,6 +127,20 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-3">
+							<label for="price">Precio Medio por persona:</label> <input
+								type="text" class="form-control" id="avg_price" name="avg_price"
+								required />
+						</div>
+						<div class="form-group col-md-3">
+							<label for="discount">Descuento:</label> <input
+								type="text" class="form-control" id="discount" name="discount"
+								required />
+						</div>
+						<div class="form-group col-md-3">
+							<label for="score">Puntuaci&oacute;n:</label> <input type="text"
+								class="form-control" id="score" name="score" required />
+						</div>
+						<div class="form-group col-md-2">
 							<label for="typeSelector">Tipo:</label> <select
 								class="form-control" id="typeSelector" name="typeSelector">
 								<option value="Espanol">Espanol</option>
@@ -130,16 +150,7 @@
 								<option value="Mexicano">Mexicano</option>
 							</select>
 						</div>
-						<div class="form-group col-md-3">
-							<label for="price">Precio Medio por persona:</label> <input
-								type="text" class="form-control" id="avg_price" name="avg_price"
-								required />
-						</div>
-						<div class="form-group col-md-3">
-							<label for="score">Puntuaci&oacute;n:</label> <input type="text"
-								class="form-control" id="score" name="score" required />
-						</div>
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-1">
 							<label for="nTables">Num. de Mesas:</label> <input type="number"
 								class="form-control" id="nTables" min="1" max="100" value="1"
 								name="nTables" required>

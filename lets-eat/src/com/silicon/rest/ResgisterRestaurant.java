@@ -1,5 +1,7 @@
 package com.silicon.rest;
 
+import java.util.logging.Logger;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -16,6 +18,9 @@ import com.silicon.dao.RestaurantDao;;
 
 public class ResgisterRestaurant extends ServerResource {
 
+	private static final Logger _logger = Logger
+			.getLogger(ResgisterRestaurant.class.getName());
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -30,17 +35,18 @@ public class ResgisterRestaurant extends ServerResource {
 			JSONObject json = new JSONObject(requestString);
 			Restaurant restaurant = new Restaurant 	(json.getString("name"),
 													json.getString("type"),
-												json.getString("desc"),
-												json.getString("telf"),
-												json.getString("m_t_open"),
-												json.getString("m_t_close"),
-												json.getString("t_t_open"),
-												json.getString("t_t_close"),
-												json.getInt("avg_price"),
-												(float)json.getDouble("score"),
-												json.getInt("totalTables"),
-												(float)json.getDouble("lat"),
-												(float)json.getDouble("lon"));
+													json.getString("desc"),
+													json.getString("telf"),
+													json.getString("m_t_open"),
+													json.getString("m_t_close"),
+													json.getString("t_t_open"),
+													json.getString("t_t_close"),
+													json.getInt("avg_price"),
+													json.getInt("discount"),
+													(float)json.getDouble("score"),
+													json.getInt("totalTables"),
+													(float)json.getDouble("lat"),
+													(float)json.getDouble("lon"));
 			result = RestaurantDao.create(restaurant);
 			jsReply = new JSONStringer();
 			jsReply.object();
@@ -49,7 +55,7 @@ public class ResgisterRestaurant extends ServerResource {
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			jsReply = new JSONStringer();
 			try {
 				jsReply.object();
@@ -57,7 +63,7 @@ public class ResgisterRestaurant extends ServerResource {
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

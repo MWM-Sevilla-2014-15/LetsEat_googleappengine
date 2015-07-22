@@ -1,6 +1,7 @@
 package com.silicon.rest;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,9 @@ import com.silicon.entities.User;
  *
  */
 public class SingIn extends ServerResource {
+	
+	private static final Logger _logger = Logger
+			.getLogger(SingIn.class.getName());
 	
 	@SuppressWarnings("finally")
 	@Post("json:json")
@@ -46,7 +50,7 @@ public class SingIn extends ServerResource {
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			jsReply = new JSONStringer();
 			try {
 				jsReply.object();
@@ -54,7 +58,7 @@ public class SingIn extends ServerResource {
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

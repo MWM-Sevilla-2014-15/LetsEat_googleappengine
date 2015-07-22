@@ -1,5 +1,7 @@
 package com.silicon.rest;
 
+import java.util.logging.Logger;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -20,6 +22,9 @@ import com.silicon.dao.UserDao;
  */
 public class SingUp extends ServerResource {
 
+	private static final Logger _logger = Logger
+			.getLogger(SingUp.class.getName());
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -44,7 +49,7 @@ public class SingUp extends ServerResource {
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			jsReply = new JSONStringer();
 			try {
 				jsReply.object();
@@ -52,7 +57,7 @@ public class SingUp extends ServerResource {
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

@@ -1,5 +1,7 @@
 package com.silicon.rest;
 
+import java.util.logging.Logger;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -18,11 +20,14 @@ import com.silicon.entities.User;
 
 public class BookRestaurant extends ServerResource{
 
+	private static final Logger _logger = Logger
+			.getLogger(BookRestaurant.class.getName());
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
 			throws ResourceException {
-
+		
 		Representation rep = null;
 		JSONStringer jsReply = null;
 		String result;
@@ -41,7 +46,7 @@ public class BookRestaurant extends ServerResource{
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			jsReply = new JSONStringer();
 			try {
 				jsReply.object();
@@ -49,7 +54,7 @@ public class BookRestaurant extends ServerResource{
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

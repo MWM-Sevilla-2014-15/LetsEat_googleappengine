@@ -3,6 +3,7 @@ package com.silicon.rest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,10 @@ import com.silicon.dao.UserDao;
  *
  */
 public class GetPass extends ServerResource {
-
+	
+	private static final Logger _logger = Logger
+			.getLogger(GetPass.class.getName());
+	
 	@SuppressWarnings("finally")
 	@Post("json:json")
 	public Representation acceptJson(JsonRepresentation represent)
@@ -48,7 +52,7 @@ public class GetPass extends ServerResource {
 			jsReply.endObject();
 			getResponse().setStatus(Status.SUCCESS_OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			_logger.warning(e.toString());
 			jsReply = new JSONStringer();
 			try {
 				jsReply.object();
@@ -56,7 +60,7 @@ public class GetPass extends ServerResource {
 				jsReply.key("desc").value(e.getMessage());
 				jsReply.endObject();
 			} catch (JSONException e1) {
-				e1.printStackTrace();
+				_logger.severe(e1.toString());
 			}
 			getResponse().setStatus(Status.SERVER_ERROR_INTERNAL);
 		} finally {

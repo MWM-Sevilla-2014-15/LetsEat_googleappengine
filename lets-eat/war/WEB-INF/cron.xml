@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+	<cron>
+		<url>/cron/resetTables</url>
+		<description>Cron responsible to reset the booked tables number to zero after 15:30</description>
+		<schedule>every day 15:30</schedule>
+    	<timezone>Europe/Madrid</timezone>
+	</cron>
+	<cron>
+		<url>/cron/resetTables</url>
+		<description>Cron responsible to reset the booked tables number to zero after 21:30</description>
+		<schedule>every day 21:30</schedule>
+    	<timezone>Europe/Madrid</timezone>
+	</cron>
+</cronentries>

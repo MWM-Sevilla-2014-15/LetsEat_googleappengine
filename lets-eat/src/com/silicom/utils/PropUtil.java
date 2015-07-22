@@ -12,6 +12,7 @@ public class PropUtil {
 	public final static String SU_OK ="SU_OK";
 	public final static String SU_E_UD ="SU_E_UD";
 	public final static String SU_E_ED ="SU_E_ED";
+	public final static String SU_E_U = "SU_E_U";
 	public final static String SI_OK ="SI_OK";
 	public final static String SI_E_UPE ="SI_E_UPE";
 	public final static String SI_E_UNR ="SI_E_UNR";
@@ -28,6 +29,9 @@ public class PropUtil {
 	public final static String BR_E_RNF =  "BR_E_RNF";
 	public final static String BR_E_U = "BR_E_U";
 	public final static String BR_E_RF = "BR_E_RF";
+	public final static String RT_OK = "RT_OK";
+	public final static String RT_E_U = "RT_E_U";
+	public final static String RT_I_NRBT = "RT_I_NRBT";
 
 	//URL redrirect
 	public final static String RESTAURANT_REGIST_URL = "/resgis_resta.jsp";
@@ -46,6 +50,7 @@ public class PropUtil {
 		propierties.put(SU_OK,"Usuario Registrado Correctamente");
 		propierties.put(SU_E_UD,"Error en Proceso de Registro de Usuario. El nombre del usuario introducido ya se encuentra registrado en la Base de Datos.");
 		propierties.put(SU_E_ED,"Error en Proceso de Registro de Usuario. El email introducido ya se encuentra registrado en la Base de Datos.");
+		propierties.put(SU_E_U,"Error en Proceso de Registro de Usuario. Error Desconocido");
 		//SingIn
 		propierties.put(SI_OK,"Usuario Autenticado Correctamente.");
 		propierties.put(SI_E_UNR,"Error en Proceso de Autenticación. El usuario introducido no se encuentra registrado.");
@@ -68,6 +73,9 @@ public class PropUtil {
 		propierties.put(BR_E_RNF,"Error en Proceso de Reserva de Restaurante. En el sistema no existe ningun restaurante con el id introducido");
 		propierties.put(BR_E_U,"Error en Proceso de Reserva de Restaurante. Error Desconocido");
 		propierties.put(BR_E_RF,"Error en Proceso de Reserva de Restaurante. No hay el número de mesas introducidas libres para el restaurante seleccionado");
-		
+		//reset booked tables (cron)
+		propierties.put(RT_OK,"Cron Proceso de Reset de las Mesas del Restaurante realizado correctamente");
+		propierties.put(RT_I_NRBT,"Aviso Cron Proceso de Reset de las Mesas del Restaurante. no hay meses reservadas");
+		propierties.put(RT_E_U,"Error Cron Proceso de Reset de las Mesas del Restaurante. Error Desconocido");
 	}
 }

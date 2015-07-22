@@ -3,6 +3,7 @@ package com.silicon.dao;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -25,11 +26,16 @@ import com.silicom.utils.PropUtil;
 import com.silicon.entities.User;
 
 public class UserDao implements InterfDao {
+	private static final Logger _logger = Logger
+			.getLogger(UserDao.class.getName());
+	
 	//User Entity
 	private final static String USER_KEY ="User";
-	private final static String USER_FIELD_EMAIL ="email";
-	private final static String USER_FIELD_NAME ="name";
-	private final static String USER_FIELD_PASS ="pass";
+	// Contact
+	private final static String USER_FIELD_EMAIL ="c_email";
+	// Description
+	private final static String USER_FIELD_NAME ="d_name";
+	private final static String USER_FIELD_PASS ="d_pass";
 	
 	public static String create(User user){	
 		String msg=PropUtil.SU_OK;
@@ -38,13 +44,12 @@ public class UserDao implements InterfDao {
 		try	{
 			// First check if that entity already exists in the database
 			datastore.get(userKey);
-			msg=PropUtil.SU_E_UD;
 		} catch	(EntityNotFoundException e)	{
 			if (isEmailDuplicated(user).equals(PropUtil.GP_E_ENE)){
 				Transaction txn = datastore.beginTransaction();
 				try {
 					Entity entryEntity =	new	Entity(USER_KEY, user.getName());
-					entryEntity.setProperty(FIELD_DATE, user.getCreateDate());
+					entryEntity.setProperty(FIELD_CREATEDATE, user.getCreateDate());
 					entryEntity.setProperty(FIELD_ACTIVE, user.getIsActived());
 					entryEntity.setProperty(USER_FIELD_EMAIL, user.getEmail());
 					entryEntity.setProperty(USER_FIELD_NAME, user.getName());
@@ -53,7 +58,9 @@ public class UserDao implements InterfDao {
 					txn.commit();
 				}finally{
 					if (txn.isActive()) {
+						msg = PropUtil.SU_E_U;
 						txn.rollback();
+						_logger.severe(PropUtil.getPropierties().get(msg));
 					}
 				}
 			}else{
@@ -94,8 +101,7 @@ public class UserDao implements InterfDao {
 				user.setName(result.getProperty(USER_FIELD_NAME).toString());
 				msg = EmailSender.sendEmail(user);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				_logger.warning(e.toString());
 			}
 		}
 		return msg;
@@ -119,5 +125,5 @@ public class UserDao implements InterfDao {
 		}
 		return msg;	
 	}
-	
+
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class User {
 	private Date createDate;
-	private int isActived;
+	private Integer isActived;
 	private String email;
 	private String name;
 	private String pass;

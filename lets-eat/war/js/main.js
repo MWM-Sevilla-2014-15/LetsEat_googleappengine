@@ -19,4 +19,13 @@ function initRegistroRest(){
 	    from: 2.5,
 	    step: 0.1
 	});
+	//Selector de Descuento
+	$("#discount").ionRangeSlider({
+	    grid: true,
+	    min: 0,
+	    max: 100,
+	    from: 0,
+	    step: 5,
+	    prefix: "%"
+	});
 }

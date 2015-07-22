@@ -11,20 +11,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error.jsp</location>
 	</error-page>
-	<!--  
-	<error-page>
-		<exception-type>java.lang.ArithmeticException</exception-type>
-		<location>/error.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>405</error-code>
-		<location>/error.jsp</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/error.jsp</location>
-	</error-page>
-	-->
+	<!-- CRON -->
+	<servlet>
+		<servlet-name>CronResetTables</servlet-name>
+		<servlet-class>com.silicom.cron.ResetBookedTables</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CronResetTables</servlet-name>
+		<url-pattern>/cron/resetTables</url-pattern>
+	</servlet-mapping>
 	<!-- ADMIN WEB -->
 	<context-param>
 		<param-name>AdministratorEmail</param-name>
