@@ -33,7 +33,7 @@ A nivel del Modelo de Datos gestiona dos Entidades: Usuarios y Restaurantes
 - org.restlet.ext.servlet.jar (Servidor)
 - org.restlet.jar (Servidor)
 - Google Maps 3 (Cliente)
-- Bootstap 3.3.5 (Cliente)
+- Bootstrap 3.3.5 (Cliente)
 - Jquery 1.11 (Cliente)
 
 ## IDE
