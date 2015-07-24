@@ -14,10 +14,10 @@ A nivel del Modelo de Datos gestiona dos Entidades: Usuarios y Restaurantes
 
 ## Tecnologias
 
-- Servidor: 
+1. Servidor: 
 ..* J2EE 7
 ..* App Engine SDK 1.9
-- Cliente: 
+2. Cliente: 
 ..* HTML5
 ..* Javascript
 ..* CSS3
