@@ -1,9 +1,8 @@
 # Let's Go and Eat | Capa de Servidor 
 
-## Autores
+## Autor
 
-Daniel Martin Jimenez
-Carlos Rodríguez Lopez
+- Carlos Rodríguez Lopez
 
 ## Descripción
 
@@ -14,5 +13,21 @@ Consiste en una Capa de Servicios Web REST junto con un Editor de Resturantes pa
 A nivel del Modelo de Datos gestiona dos Entidades: Usuarios y Restaurantes
 
 ## Tecnologias
+
+- J2EE 7
+- App Engine SDK 1.9
+
+## Librerias
+
+- gson 2.3.1
+- org.json
+- org.restlet.ext.json.jar
+- org.restlet.ext.servlet.jar
+- org.restlet.jar
+
+## IDE
+
+- Eclipse Luna
+- Google Suite Plugin 3.8.0
 
 
