@@ -1,8 +1,9 @@
 # Let's Go and Eat | Capa de Servidor 
 
-## Autor
+## Autores
 
-Carlos Rodriguez Lopez (@carlosrodlop)
+- Carlos Rodriguez Lopez (@carlosrodlop)
+- Daniel Martin Jimenez
 
 ## Url
 
