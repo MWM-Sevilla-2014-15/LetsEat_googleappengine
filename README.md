@@ -2,7 +2,11 @@
 
 ## Autor
 
-- Carlos Rodríguez Lopez 
+Carlos Rodriguez Lopez (@carlosrodlop)
+
+## Url
+
+http://com-silicon-letseat.appspot.com/
 
 ## Descripción
 
