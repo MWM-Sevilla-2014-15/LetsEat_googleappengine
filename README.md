@@ -14,21 +14,22 @@ A nivel del Modelo de Datos gestiona dos Entidades: Usuarios y Restaurantes
 
 ## Tecnologias
 
-1. Servidor: 
-⋅⋅* J2EE 7
-⋅⋅* App Engine SDK 1.9
-2. Cliente: 
-⋅⋅* HTML5
-⋅⋅* Javascript
-⋅⋅* CSS3
+- J2EE 7 (Servidor)
+- App Engine SDK 1.9 (Servidor)
+- HTML5 (Cliente)
+- Javascript (Cliente)
+- CSS3 (Cliente)
 
 ## Librerias
 
-- gson 2.3.1
-- org.json
-- org.restlet.ext.json.jar
-- org.restlet.ext.servlet.jar
-- org.restlet.jar
+- gson 2.3.1 (Servidor)
+- org.json (Servidor) 
+- org.restlet.ext.json.jar (Servidor)
+- org.restlet.ext.servlet.jar (Servidor)
+- org.restlet.jar (Servidor)
+- Google Maps 3 (Cliente)
+- Bootstap 3.3.5 (Cliente)
+- Jquery 1.11 (Cliente)
 
 ## IDE
 
